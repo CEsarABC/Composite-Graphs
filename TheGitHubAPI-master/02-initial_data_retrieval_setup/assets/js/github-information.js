@@ -65,6 +65,8 @@ function repoInformationHTML(repos) {
   * a user name  */
 
 function fetchGitHubInformation(event) {
+    $("#gh-user-data").html("");
+    $("#gh-repo-data").html("");
 
     var username = $("#gh-username").val();
 
@@ -113,3 +115,5 @@ a html code which will display a message for such ${username}*/
             }
         });
 }
+
+$(document).ready(fetchGitHubInformation);
