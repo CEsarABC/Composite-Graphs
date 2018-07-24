@@ -22,6 +22,30 @@ function userInformationHTML(user) {
 
 /* this function brings the user information and gives format to it at the same time */
 
+// this new function brigs the repos from the user
+
+function repoInformationHTML(repos) {
+    if (repos.length == 0){
+        return `<div class='clearfix repo-list'>No repos!</div>`;
+    }
+
+    var listItemsHTML = repos.map(function (repo) {
+        return `<li>
+                    <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                 </li>`;
+    });
+
+    return `<div class="clearfix repo-list">
+                <p>
+                    <strong>Repo List:</strong>
+                </p>
+                <ul>
+                    ${listItemsHTML.join("\n")}
+                </ul>
+            </div>`;
+
+}
+
 
 //--------------------------------------
 
@@ -69,11 +93,15 @@ a html code which will display a message for such ${username}*/
 /*  */
 
     $.when(
-        $.getJSON(`https://api.github.com/users/${username}`)
+        $.getJSON(`https://api.github.com/users/${username}`),
+        // this second JSON request is to bring the repositories
+        $.getJSON(`https://api.github.com/users/${username}/repos`)
     ).then(
-        function (response) {
-            var userData = response;
+        function (firstResponse,secondResponse) {
+            var userData = firstResponse[0];//targeting arrays
+            var repoData = secondResponse[0];
             $('#gh-user-data').html(userInformationHTML(userData));
+            $('#gh-repo-data').html(repoInformationHTML(repoData));
         }, function (errorResponse) {
             if (errorResponse.status === 404){
                 $('#gh-user-data').html(
