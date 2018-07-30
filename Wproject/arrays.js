@@ -23,11 +23,9 @@ function myFunction() {
 */
 
 var gNames = ['alejandra','martina','josefa','renata','francis'];
-var ages = [18,54,34,23,22];
+var ages = [18,19,20,21,50];
 var Career = ['graphic design','nursing','reporter','police officer','politician'];
 
-var i;
-var mix='';
 
 function my_gNames() {
     gNames.sort(function(a, b){return 0.5 - Math.random()});
@@ -44,6 +42,10 @@ function my_Career() {
 my_gNames();
 my_ages();
 my_Career();
+
+
+var i;
+var mix='';
 
 for( i= 0; i < gNames.length; i++)
     mix += (gNames[i]+ ' ' + ages[i]+ ' ' + Career[i]) + '\n';
@@ -82,11 +84,36 @@ var me = new Person('cesar','bernal', 35);
 console.log(me.name_p + '\n');
 
 var woman = new Person(gNames[0],Career[0],ages[0]);
-console.log(woman + '\n');
+console.log(woman);
+console.log('\n');
 
-var j;
-var mix1 = [];
-for(j = 0; j < gNames.length; j++)
-    mix1[j] += new Person(gNames[i],Career[i],ages[i]);
 
-console.log(mix1);
+function objectsInArray() {
+    var j;
+    var man;
+
+    for(j = 0; j < gNames.length; j++)
+        man = new Person(gNames[j],Career[j],ages[j]);
+        console.log(man + '\n');
+}
+
+objectsInArray();
+
+
+// i need to print all objects, by now should be printing just the last one and not inside an array
+
+//new idea ['name: '+ gNames[i] +', '+'prof: '+ prof[i] + ', '+ 'age: ' + ages[i]
+
+var superArray = [];
+
+function newInArray() {
+    var k;
+
+    for(k = 0; k < gNames.length; k++)
+
+        superArray[k] = [('name: '+ gNames[k] +', '+'prof: '+ Career[k] + ', '+ 'age: ' + ages[k])]
+    console.log(superArray);
+
+}
+
+newInArray();
