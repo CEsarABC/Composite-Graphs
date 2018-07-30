@@ -88,14 +88,24 @@ console.log(woman);
 console.log('\n');
 
 
+
+var man = [];
 function objectsInArray() {
     var j;
-    var man;
-
     for(j = 0; j < gNames.length; j++)
-        man = new Person(gNames[j],Career[j],ages[j]);
+        man.push(new Person(gNames[j],Career[j],ages[j]));
         console.log(man + '\n');
 }
+
+//function to unpack the objects
+
+function writeToDocumentExtra() {
+        man.forEach(function (item) {
+            document.getElementById('demo').innerHTML = item.name_p;
+        });
+}
+
+//document.getElementById("demo").innerHTML = man;
 
 objectsInArray();
 
@@ -108,11 +118,10 @@ var superArray = [];
 
 function newInArray() {
     var k;
-
     for(k = 0; k < gNames.length; k++)
-
         superArray[k] = [('name: '+ gNames[k] +', '+'prof: '+ Career[k] + ', '+ 'age: ' + ages[k])]
-    console.log(superArray);
+        console.log(superArray);
+    //document.getElementById("demo1").innerHTML = superArray;
 
 }
 
