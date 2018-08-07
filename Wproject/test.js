@@ -1,15 +1,33 @@
+/*var gNames = ['alejandra','martina','josefa','renata','francis','mariana','flora','tatiana'];
+var ages = [18,19,20,21,50,45,23,64];
+var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer'];
+var salaries = [300,250,289,600,420,670,290,357];
 
-var gNames = ['alejandra','martina','josefa','renata','francis','mariana'];
-var ages = [18,19,20,21,50,45];
-var Career = ['graphic design','nursing','reporter','police officer','politician','curator'];
+function my_salary() {
+    salaries.sort(function(a, b){return 0.5 - Math.random()});
+}
 
+my_salary();
 
-const person = {
-  name: gNames[0],
-  age: ages[0],
-  prof: Career[0]
-};
+function Person(first, prof, age, salary) {
+    this.name_p = first;
+    this.prof_p = prof;
+    this.age_p = age;
+    this.salary_p = salary;
+}
+var woman = [];
+function objectsInArray() {
+    var j;
+    for (j = 0; j < gNames.length; j++)
+        woman.push(new Person(gNames[j], Career[j], ages[j], salaries[j]));
+    console.log(woman + '\n');
+}
+objectsInArray();
 
-console.log(Object.values(person)+'\n');
-console.log(person.age + '\n');
-console.log(person + '\n');
+function writeToDocumentTest() {
+     var el = document.getElementById('test');
+        el.innerHTML = '';
+        woman.forEach(function (item) {
+            document.getElementById('test').innerHTML += '<p>' + item.salary_p + '</p>';
+        });
+}*/
