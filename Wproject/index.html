@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Index for arrays js</title>
+    <script type="text/javascript" src="d3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css"/>
     <script src="arrays.js"></script>
     <script src="test.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css"/>
     <style>
         div {
             clear: left;
         }
     </style>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+
     <style>
         .box{
             width: 100px;
@@ -27,31 +25,60 @@
     </style>
 </head>
 <body>
-
+<div id="draw-chart">
+    <h1>Salaries graph from (Woman) array of objects</h1>
+    <script>bigGraph();</script>
+</div>
 <div>
+    <h1>Data from an array of objects</h1>
     <button onclick="writeToDocumentNames()">Names</button>
     <button onclick="writeToDocumentCareers()">Careers</button>
     <button onclick="writeToDocumentAges()">Ages</button>
     <button onclick="writeToDocumentSalaries()">Salaries</button>
 </div>
+
 <div class="box" id="demo"></div>
 <div class="box" id="demo1"></div>
 <div class="box" id="demo2"></div>
 <div class="box" id="demo3"></div>
 
-<div>
-    <h3>Chart</h3>
-        <div id="per-person-chart"></div>
+<div id="draw-here">
+    <h1>Example of circles and array</h1>
+    <script>
+    var w = 800;
+    var h = 200;
+    var data = [40, 50, 10, 30, 20, 45, 80];
+
+    var svg = d3.select("#draw-here")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+    svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d,i) {
+                return 50 + (i * 100);
+        })
+        /*.attr("cy", h/2)*/
+        .attr('cy', function (d) {
+            return h - (d / 2) ;
+        })
+        .attr("r", function (d) {
+                return d/2;
+    });
+    </script>
 </div>
-<div id="jsonTest"></div>
-<script>
-document.getElementById("jsonTest").innerHTML = Caesar;
-</script>
 
+<div id="d3Test">
+    <h1>D3 and array of objects</h1>
+    <script>salaryGraph();</script>
+</div>
 
-<script>
-    /*queue()
-    .await(newInArray);*/
-</script>
+<div id="graph1">
+    <h1>Sample of a simple D3</h1>
+    <script>graph1();</script>
+</div>
+
 </body>
 </html>

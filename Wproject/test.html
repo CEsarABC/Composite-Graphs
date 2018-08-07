@@ -3,33 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>test for file download</title>
-
+    <script src="d3.min.js"></script>
     <script src="test.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 </head>
 <body>
-<!--<form id="addnew">
-    <input type="text" class="id">
-    <input type="text" class="content">
-    <input type="submit" value="Add">
-</form>
-<script>
-    jQuery(function($) {
-        $('#form_addjts').submit(function(){
-            writeToFile({
-                id: $(this).find('.id').val(),
-                content: $(this).find('.content').val()
-            });
-            return false;
-        });
-        function writeToFile(data){
-            var fso = new ActiveXObject("Scripting.FileSystemObject");
-            var fh = fso.OpenTextFile("C:\test\test.txt", 8);
-            fh.WriteLine(data.id + ',' + data.content);
-            fh.Close();
-        }
-    });
-</script>-->
+<div id="d3Test">
+    <script>//salaryGraph();</script>
+    <script>graph2();</script>
+</div>
+
+
+<div id="draw-chart">
+    <h1>Salaries graph from (Woman) array of objects</h1>
+    <script>bigGraph();</script>
+</div>
 
 </body>
 </html>
