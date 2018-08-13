@@ -22,10 +22,11 @@ function myFunction() {
 
 */
 
-var gNames = ['alejandra','martina','josefa','renata','francis','mariana','flora','tatiana'];
+var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana'];
 var ages = [18,19,20,21,50,45,23,64];
 var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer'];
 var salaries = [300,250,289,600,420,670,290,357];
+var cities = ['London', 'Liverpool','Manchester','London', 'London','Liverpool','Manchester','London'];
 
 //using random to mix all info in arrays
 
@@ -45,14 +46,19 @@ function my_salary() {
     salaries.sort(function(a, b){return 0.5 - Math.random()});
 }
 
+function my_cities() {
+    cities.sort(function(a, b){return 0.5 - Math.random()});
+}
+
 my_gNames();
 my_ages();
 my_Career();
 my_salary();
+my_cities();
 
-console.log(salaries);
+console.log(cities);
 
-// -- not working mix is not an array
+/*// -- not working mix is not an array
 var i;
 var mix=[];
 function createMixArray() {
@@ -75,55 +81,59 @@ function createMixArray() {
 
 //console.log(ages[1]+'\n');
 
-//sample of an object
+//sample of an object*/
 
-const persona = {
+/*const persona = {
   name: gNames[0],
   age: ages[0],
   prof: Career[0],
-  salary: salaries[0]
+  salary: salaries[0],
+    city: cities[0]
 };
 
 console.log(Object.values(persona)+'\n');
 //console.log(persona.age + '\n');
-//console.log(persona + '\n');
+//console.log(persona + '\n');*/
 
 //*******************constructor for people******************
 
-function Person(first, prof, age, salary) {
+function Person(first, prof, age, salary, city) {
     this.name_p = first;
     this.prof_p = prof;
     this.age_p = age;
     this.salary_p = salary;
+    this.town_p = city;
 }
 
-var me = new Person('cesar','bernal', 35,500);
+/*var me = new Person('cesar','bernal', 35,500,'London');
 
-//console.log(me + '\n');
+console.log(Object.values(me) + '\n');
 
 // **************converting the object to JSON**************** //
 
-var womanTest = new Person(gNames[0],Career[0],ages[0],salaries[0]);
+var womanTest = new Person(gNames[0],Career[0],ages[0],salaries[0],cities[0]);
 console.log(womanTest);
 console.log('\n');
 //var myJSON = JSON.stringify(womanTest);
-//console.log(myJSON + '\n');
+//console.log(myJSON + '\n');*/
 
-//the working instruction to create the objects array
+///////////////////the working instruction to create the objects array////////////
+
 var woman = [];
 function objectsInArray() {
     var j;
     for(j = 0; j < gNames.length; j++)
-        woman.push(new Person(gNames[j],Career[j],ages[j],salaries[j]));
+        woman.push(new Person(gNames[j],Career[j],ages[j],salaries[j],cities[j]));
         console.log(woman + '\n');
 }
 
-//document.getElementById("demo").innerHTML = woman;
+//
 
 objectsInArray();
+
 console.log(woman[1].salary_p + ' this is the test');
-console.log(woman[1].age_p + ' this is the test');
-console.log(Object.values(woman[1])+'\n');
+console.log(woman[1].town_p + ' this is the test');
+console.log(Object.values(woman[2])+'\n');
 
 //function to unpack the objects
 //Course Working With External Resources Data & The DOM Unpacking Our Data Onto The DOM
@@ -161,6 +171,15 @@ function writeToDocumentSalaries() {
         });
 }
 
+function writeToDocumentTown() {
+     var el = document.getElementById('demo4');
+        el.innerHTML = '';
+        woman.forEach(function (item) {
+            document.getElementById('demo4').innerHTML += '<p>' + item.town_p + '</p>';
+        });
+}
+
+
 // i need to print all objects, by now should be printing just the last one and not inside an array
 
 //new idea ['name: '+ gNames[i] +', '+'prof: '+ prof[i] + ', '+ 'age: ' + ages[i]
@@ -178,7 +197,7 @@ function newInArray() {
 newInArray();
 
 
-/////////////////////////////big test
+/////////////////////////////big test Salaries
 
 
 
@@ -246,4 +265,31 @@ function bigGraph() {
         .attr('font-size', '11px')
         .attr('fill','white')
 
+}
+
+/////////////////////////////////////
+
+/// working ///
+
+function salaryGraph() {
+    d3.select('body')
+    .selectAll('#d3Test')
+    .data(woman)
+    .enter()
+    .append('p')
+        .text(woman.forEach(function (item) {
+                document.getElementById('d3Test').innerHTML += item.salary_p +', ';
+        }));
+}
+
+
+var datasetB = [1,2,3,4,5,6];
+
+function graph1() {
+    d3.select('#graph1')
+        .select('p')
+        .data(datasetB)
+        .enter()
+        .append('p')
+        .text('D3 is awesome');
 }
