@@ -20,7 +20,8 @@
 <body>
 <h1>D3 and SVG</h1>
 
-<div id="draw-here"></div>
+<div id="draw-here"><h1>Example of circles and array</h1></div>
+
 <div id="draw-chart"></div>
 
 <script>
@@ -81,7 +82,7 @@
             return scale(d);
         })
         .attr('width', barwidth)
-        .attr('fill', 'red');
+        .attr('fill', 'green');
 
     svg.selectAll('text')
         .data(dataset)

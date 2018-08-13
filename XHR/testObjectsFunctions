@@ -1,0 +1,27 @@
+var car = {
+    owner1: 'Cesar',
+    name1: 'speedy',
+    year1: 2017,
+    wheels1: 4,
+    doors1: 5,
+    bio1: function(){
+        return('The owner '+ this.owner1 + ' named ' + this.name1 + ' made on the year ' + this.year1);
+    }
+};
+
+console.log(car);
+console.log(car.owner1);
+console.log(car.bio1());
+
+
+
+var person = {
+    firstName: "John",
+    lastName : "Doe",
+    id       : 5566,
+    fullName : function() {
+       return('this is the ' + this.firstName + " " + this.lastName + ' last name');
+    }
+};
+console.log(person.fullName());
+console.log(person.firstName);

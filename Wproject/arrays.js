@@ -22,11 +22,14 @@ function myFunction() {
 
 */
 
-var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana'];
-var ages = [18,19,20,21,50,45,23,64];
-var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer'];
-var salaries = [300,250,289,600,420,670,290,357];
-var cities = ['London', 'Liverpool','Manchester','London', 'London','Liverpool','Manchester','London'];
+var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kimberley',
+    'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'];
+var ages = [18,19,20,21,50,45,23,64,23,34,65,78,55,33,21,20,24,29];
+var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer','receptionist',
+    'lawyer','chef','secretary','athlete','tutor','driver','pilot','technician','governor'];
+var salaries = [300,250,289,600,420,670,290,357,800,450,200,150,600,730,509,445,345,200];
+var cities = ['London', 'Liverpool','Manchester','London', 'London','Liverpool','Manchester','London','London','Liverpool','Manchester',
+'London','London','London','London','Liverpool','Manchester','Manchester'];
 
 //using random to mix all info in arrays
 
@@ -211,6 +214,8 @@ newInArray();
     var barwidth = colWidth - barPadding; //gives the total width for each bar
     var salaryValues = [];
 
+
+///////////// Making a new array for on of the values/////////////
     function salaryArray() {
         for(u = 0; u < lenghtWoman; u++)
             salaryValues[u] = woman[u].salary_p;
@@ -225,14 +230,29 @@ function bigGraph() {
         .domain([0, d3.max(salaryValues)])//we can use a function to give the max value in the array
         .range([0,400]);
 
+
+
     var svg = d3.select('#draw-chart')
         .append('svg')
         .attr('height', h)
         .attr('width', w);
+
+    var svgDefs = svg.append('defs');
+        var mainGradient = svgDefs.append('linearGradient')
+                .attr('id', 'mainGradient');
+        mainGradient.append('stop')
+                .attr('class', 'stop-left')
+                .attr('offset', '0');
+
+        mainGradient.append('stop')
+                .attr('class', 'stop-right')
+                .attr('offset', '1');
+
     svg.selectAll('rect')
         .data(salaryValues)
         .enter()
         .append('rect')
+        .classed('filled',true)
         .attr('x', function (d ,i) {
             return i*( w / lenghtWoman); //gives position the every element by multiplying the index
         })
@@ -243,7 +263,7 @@ function bigGraph() {
             return scale(d);
         })
         .attr('width', barwidth)
-        .attr('fill', 'green');
+
 
     svg.selectAll('text')
         .data(salaryValues)

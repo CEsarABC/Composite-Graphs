@@ -52,7 +52,7 @@
             .height(300)
             .dimension(name_dim)
             .group(total_spend_per_person)
-            .transitionDuration(500);
+            .transitionDuration(1000);
 
         var store_dim = ndx.dimension(dc.pluck('store'));
         var total_spend_per_store = store_dim.group().reduceSum(dc.pluck('spend'));
@@ -61,7 +61,7 @@
             .height(300)
             .dimension(store_dim)
             .group(total_spend_per_store)
-            .transitionDuration(500);
+            .transitionDuration(1000);
 
         var state_dim = ndx.dimension(dc.pluck('state'));
         var total_spend_per_state = state_dim.group().reduceSum(dc.pluck('spend'));
@@ -70,7 +70,7 @@
             .height(300)
             .dimension(state_dim)
             .group(total_spend_per_state)
-            .transitionDuration(500);
+            .transitionDuration(1000);
 
      dc.renderAll();
     }
