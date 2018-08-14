@@ -1,0 +1,52 @@
+body {
+    background-color: #21211f;
+    color: #636363;
+    font-family: Roboto, sans-serif;
+}
+
+.container{
+    margin: auto;
+    /*border: solid 1px #1b6d85;*/
+    /*padding: 10px;*/
+
+}
+
+.row{
+    border: solid 1px #2c8011;
+}
+.col-sm-6{
+    border: solid 1px #985f0d;
+}
+
+h1{
+    color: #1f779f;
+}
+
+h2 {
+    color: #f79702;
+}
+h3{
+    color: #1f779f;
+}
+#per-person-chart{
+    background-color: beige;
+    color: #1b6d85;
+    font-family: Roboto, sans-serif;
+}
+#per-state-chart{
+    background-color: beige;
+    color: #1b6d85;
+    font-family: Roboto, sans-serif;
+}#per-store-chart{
+    background-color: beige;
+    color: #1b6d85;
+    font-family: Roboto, sans-serif;
+}
+
+ .boxStyle{
+     background-color: beige;
+    color: #1b6d85;
+    font-family: Roboto, sans-serif;
+ }
+
+

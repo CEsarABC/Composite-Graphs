@@ -1,6 +1,11 @@
-var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kimberley',
+
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////Creates my Json Data and randomise all values/////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kim',
     'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'];
-var ages = [18,19,20,21,50,45,23,64,23,34,65,78,55,33,21,20,24,29];
+var ages = [18,19,20,21,50,45,23,64,23,34,65,78,55,33,22,20,24,29];
 var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer','receptionist',
     'lawyer','chef','secretary','athlete','tutor','driver','pilot','technician','governor'];
 var salaries = [300,250,289,600,420,670,290,357,800,450,200,150,600,730,509,445,345,200];
@@ -42,6 +47,7 @@ function Person(first, prof, age, salary, city) {
     this.town_p = city;
 }
 
+///////////////////creating my array o objects to replace json files////////////////
 var woman = [];
 function objectsInArray() {
     var j;
@@ -52,7 +58,7 @@ function objectsInArray() {
 
 objectsInArray();
 
-
+////////creating variables to use in bigGraph function/////////////
     var h = 300;
     var w = 550;
     var barPadding = 2;
@@ -63,7 +69,7 @@ objectsInArray();
     var salaryValues = [];
 
 
-///////////// Making a new array for on of the values/////////////
+///////////// Making a new array for salary values to show in the graph /////////////
     function salaryArray() {
         for(u = 0; u < lenghtWoman; u++)
             salaryValues[u] = woman[u].salary_p;
@@ -134,3 +140,138 @@ function bigGraph() {
         .attr('fill','white')
 
 }
+
+function crossFilter() {
+
+
+    var ndx = crossfilter(woman);
+
+    var name_dim = ndx.dimension(dc.pluck('name_p'));
+    var total_spend_per_person = name_dim.group().reduceSum(dc.pluck('salary_p'));
+
+    dc.barChart('#per-person-chart')
+        .width(800)
+        .height(300)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(name_dim)
+        .group(total_spend_per_person)
+        .transitionDuration(1000)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel('Person')
+        .yAxis().ticks(10);
+
+
+    var store_dim = ndx.dimension(dc.pluck('age_p'));
+    var total_spend_per_store = store_dim.group().reduceSum(dc.pluck('salary_p'));
+
+    dc.barChart("#per-store-chart")
+        .width(800)
+        .height(300)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(store_dim)
+        .group(total_spend_per_store)
+        .transitionDuration(1000)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel('Age')
+        .yAxis().ticks(10);
+
+    var state_dim = ndx.dimension(dc.pluck('town_p'));
+    var total_spend_per_state = state_dim.group().reduceSum(dc.pluck('salary_p'));
+
+    dc.barChart('#per-state-chart')
+        .width(800)
+        .height(300)
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
+        .dimension(state_dim)
+        .group(total_spend_per_state)
+        .transitionDuration(1000)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel('City')
+        .yAxis().ticks(10);
+
+    dc.renderAll();
+}
+
+function pieChartsWoman() {
+
+
+        var ndx = crossfilter(woman);
+
+        var name_dim = ndx.dimension(dc.pluck('name_p'));
+        var total_spend_per_person = name_dim.group().reduceSum(dc.pluck('salary_p'));
+
+        dc.pieChart('#draw-pies1')
+            .height(250)
+            .radius(100)
+            .transitionDuration(1500)
+            .dimension(name_dim)
+            .group(total_spend_per_person);
+
+        var store_dim = ndx.dimension(dc.pluck('town_p'));
+        var total_spend_per_store = store_dim.group().reduceSum(dc.pluck('salary_p'));
+        dc.pieChart('#draw-pies2')
+            .height(250)
+            .radius(100)
+            .transitionDuration(1500)
+            .dimension(store_dim)
+            .group(total_spend_per_store);
+
+        var state_dim = ndx.dimension(dc.pluck('name_p'));
+        var total_spend_per_state = state_dim.group().reduceSum(dc.pluck('age_p'));
+
+        dc.pieChart('#draw-pies3')
+            .height(250)
+            .radius(100)
+            .transitionDuration(1500)
+            .dimension(state_dim)
+            .group(total_spend_per_state);
+
+        dc.renderAll();
+    }
+
+function stackedGraphs() {
+        var ndx = crossfilter(woman);
+
+        var name_dim = ndx.dimension(dc.pluck('name_p'));
+
+        var spendByNameStoreA = name_dim.group().reduceSum(function (d) {
+                if (d.town_p === 'London') {
+                    return +d.salary_p;
+                } else {
+                    return 0;
+                }
+            });
+        var spendByNameStoreB = name_dim.group().reduceSum(function (d) {
+                if (d.town_p === 'Liverpool') {
+                    return +d.salary_p;
+                } else {
+                    return 0;
+                }
+            });
+        var spendByNameStoreC = name_dim.group().reduceSum(function (d) {
+                if (d.town_p === 'Manchester') {
+                    return +d.salary_p;
+                } else {
+                    return 0;
+                }
+            });
+
+        var stackedChart = dc.barChart("#chart-here2");
+        stackedChart
+            .width(800)
+            .height(400)
+            .dimension(name_dim)
+            .group(spendByNameStoreA, "London")
+            .stack(spendByNameStoreB, "Liverpool")
+            .stack(spendByNameStoreC, "Manchester")
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .legend(dc.legend().x(720).y(0).itemHeight(15).gap(5));
+
+        stackedChart.margins().right = 100;
+
+        dc.renderAll();
+    }
