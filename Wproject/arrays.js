@@ -22,7 +22,7 @@ function myFunction() {
 
 */
 
-var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kimberley',
+var gNames = ['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kim',
     'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'];
 var ages = [18,19,20,21,50,45,23,64,23,34,65,78,55,33,21,20,24,29];
 var Career = ['graphic design','nursing','reporter','police officer','politician','curator','engineer','photographer','receptionist',
@@ -30,6 +30,25 @@ var Career = ['graphic design','nursing','reporter','police officer','politician
 var salaries = [300,250,289,600,420,670,290,357,800,450,200,150,600,730,509,445,345,200];
 var cities = ['London', 'Liverpool','Manchester','London', 'London','Liverpool','Manchester','London','London','Liverpool','Manchester',
 'London','London','London','London','Liverpool','Manchester','Manchester'];
+var date = [
+    '01/04/1994',
+  '06/09/1997',
+  '12/12/1968',
+  '13/09/1973',
+  '22/05/1995',
+  '05/03/2000',
+  '08/10/1999',
+  '21/07/1996',
+  '12/07/1998',
+  '13/04/1963',
+  '19/09/1989',
+  '28/02/1953',
+  '12/07/1985',
+  '03/12/1940',
+  '13/09/1998',
+  '14/01/1995',
+  '02/09/1954',
+  '10/06/1984'];
 
 //using random to mix all info in arrays
 
@@ -100,12 +119,27 @@ console.log(Object.values(persona)+'\n');
 
 //*******************constructor for people******************
 
-function Person(first, prof, age, salary, city) {
+var birthYear = [];
+var thisYear = 2018;
+function makeBirthYear() {
+    var j;
+    for(j = 0; j < ages.length ; j++)
+        birthYear.push(thisYear - ages[j]);
+        console.log(birthYear);
+}
+
+makeBirthYear();
+
+
+function Person(first, prof, age, salary, city, birth, date1) {
     this.name_p = first;
     this.prof_p = prof;
     this.age_p = age;
     this.salary_p = salary;
     this.town_p = city;
+    this.birth_p  = birth;
+    this.date_p = date1;
+
 }
 
 /*var me = new Person('cesar','bernal', 35,500,'London');
@@ -126,10 +160,10 @@ var woman = [];
 function objectsInArray() {
     var j;
     for(j = 0; j < gNames.length; j++)
-        woman.push(new Person(gNames[j],Career[j],ages[j],salaries[j],cities[j]));
+        woman.push(new Person(gNames[j],Career[j],ages[j],salaries[j],cities[j],birthYear[j], date[j]));
         console.log(woman + '\n');
+        console.log(woman[3]);
 }
-
 //
 
 objectsInArray();

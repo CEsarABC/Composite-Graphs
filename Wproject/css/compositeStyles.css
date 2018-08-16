@@ -6,6 +6,8 @@ body {
 
 .container{
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     /*border: solid 1px #1b6d85;*/
     /*padding: 10px;*/
 
@@ -13,6 +15,7 @@ body {
 
 .row{
     border: solid 1px #2c8011;
+    margin-bottom: 5px;
 }
 .col-sm-6{
     border: solid 1px #985f0d;
@@ -27,20 +30,6 @@ h2 {
 }
 h3{
     color: #1f779f;
-}
-#per-person-chart{
-    background-color: beige;
-    color: #1b6d85;
-    font-family: Roboto, sans-serif;
-}
-#per-state-chart{
-    background-color: beige;
-    color: #1b6d85;
-    font-family: Roboto, sans-serif;
-}#per-store-chart{
-    background-color: beige;
-    color: #1b6d85;
-    font-family: Roboto, sans-serif;
 }
 
  .boxStyle{

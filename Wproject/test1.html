@@ -24,60 +24,88 @@
 <body>
 <h1>Data Visualisation</h1>
 
-    <h2>DC Stacked Bar Chart</h2>
+    <h2>scatter-plot</h2>
 
     <div>
-        <h3>Total Salary Per Person Broken Down By City</h3>
-        <div id="chart-here"></div>
+        <div id="scatter-plot"></div>
     </div>
 
     <script>
 
     function makeGraphs() {
+
         var ndx = crossfilter(woman);
 
-        var name_dim = ndx.dimension(dc.pluck('name_p'));
+        var parseDate = d3.time.format("%d/%m/%Y").parse;
+        woman.forEach(function(d){
+            d.date_p = parseDate(d.date_p);
+        });
 
-        var spendByNameStoreA = name_dim.group().reduceSum(function (d) {
-                if (d.town_p === 'London') {
-                    return +d.salary_p;
-                } else {
-                    return 0;
-                }
-            });
-        var spendByNameStoreB = name_dim.group().reduceSum(function (d) {
-                if (d.town_p === 'Liverpool') {
-                    return +d.salary_p;
-                } else {
-                    return 0;
-                }
-            });
-        var spendByNameStoreC = name_dim.group().reduceSum(function (d) {
-                if (d.town_p === 'Manchester') {
-                    return +d.salary_p;
-                } else {
-                    return 0;
-                }
-            });
+        var date_dim = ndx.dimension(dc.pluck('date_p'));
 
-        var stackedChart = dc.barChart("#chart-here");
-        stackedChart
-            .width(800)
-            .height(400)
-            .dimension(name_dim)
-            .group(spendByNameStoreA, "London")
-            .stack(spendByNameStoreB, "Liverpool")
-            .stack(spendByNameStoreC, "Manchester")
-            .x(d3.scale.ordinal())
-            .xUnits(dc.units.ordinal)
-            .legend(dc.legend().x(720).y(0).itemHeight(15).gap(5));
+        var min_date = date_dim.bottom(1)[0].date_p;
+        var max_date = date_dim.top(1)[0].date_p;
 
-        stackedChart.margins().right = 100;
+        var salary_dim = ndx.dimension(function (d) {
+            return [d.date_p, d.salary_p, d.name_p];
+        });
 
+        var tradeColors = d3.scale.ordinal()
+            .domain(['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kim',
+    'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'])
+            .range(["red", "green", "blue",'orange','black','yellow','brown','purple',
+                '#2D2C34','#68941B','#CB4F2D','#9C4A1A','#1F779F','#4C4D4F','#0D3649','#64400B','#863B21','#5B5348']);
+
+
+        var salary_group = salary_dim.group();
+
+        var subChart = function (c) {
+            return dc.scatterPlot(c)
+                .symbolSize(8)
+                .highlightedSize(10);
+        };
+
+
+        var chart = dc.seriesChart("#scatter-plot");
+        chart
+            .width(900)
+            .height(450)
+            .chart(subChart)
+            .x(d3.time.scale().domain([min_date, max_date]))
+            .brushOn(false)
+            .clipPadding(10)
+            .yAxisLabel("Salary")
+            .xAxisLabel("Birth")
+            .elasticY(true)
+            .dimension(salary_dim)
+            .group(salary_group)
+            .mouseZoomable(true)
+            .shareTitle(false) // allow default scatter title to work
+            .seriesAccessor(function (d) {
+                return d.key[2];
+            })
+            .keyAccessor(function (d) {
+                return d.key[0];
+            })
+            .valueAccessor(function (d) {
+                return +d.key[1];
+            })
+            .colorAccessor(function (d) {
+                return d.key[2].name_p;
+            })
+            .colors(tradeColors)
+
+            .legend(dc.legend().x(770).y(50).itemHeight(13).gap(5).horizontal(1).legendWidth(70).itemWidth(70));
+
+        chart.margins().left += 20;
+        chart.margins().bottom += 20;
+        chart.margins().right = 150;
         dc.renderAll();
     }
     makeGraphs();
+
     </script>
+</div>
 
 </body>
 </html>
