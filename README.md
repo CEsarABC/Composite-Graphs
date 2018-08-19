@@ -9,14 +9,18 @@ the calls of json files in which the json file is an array filled with objects, 
 as having the jason file parsed and ready to work.
 I decided to use my array to be the base of my graphs
 
-*this repository was created to host my the local repository
+*I have a messy repository because is my first time trying to use github properly... sorry!!!
+
+*this repository was created to host my the local repository in my computer
 
 all folders and files used as reference for the creation of the project are part of this repository
 
 /////////////////the main project is located in Wproject folder/////////////////
 
 *all dc grahps are shown in the file compositeProject.html
+
 *the JS file holding the java scripts is cleanGraphs.js
+
 *all modules used in the document are stored locally in the folder jsModules
 
 
