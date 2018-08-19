@@ -106,6 +106,53 @@
 
     </script>
 </div>
+<h1>Data Vizualisation</h1>
+
+    <h2>DC Average</h2>
+
+    <div>
+    <h3>Select Store</h3>
+    <div id="store-selector"></div>
+    </div>
+
+    <div>
+    <h3>Person Spend</h3>
+    <div id="person-spend-chart"></div>
+
+    </div>
+<div>
+    <script>
+    function makeGraphs() {
+        var ndx = crossfilter(woman);
+
+        var cityDim = ndx.dimension(dc.pluck('town_p'));
+
+        var selectCity = dc.selectMenu('#store-selector');
+        cityDim = ndx.dimension(dc.pluck('town_p'));
+        selectCityGroup = cityDim.group();
+
+        selectCity
+            .dimension(cityDim)
+            .group(selectCityGroup);
+
+
+        var personDim = ndx.dimension(dc.pluck('name_p'));
+        var salaryByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
+        dc.rowChart("#person-spend-chart")
+            .width(900)
+            .height(700)
+            .dimension(personDim)
+            .group(salaryByPerson)
+            .xAxis().ticks(10);
+
+        dc.renderAll();
+    };
+    makeGraphs();
+    </script>
+
+</div>
+
+
 
 </body>
 </html>

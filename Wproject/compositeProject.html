@@ -41,14 +41,14 @@
 <div class="container">
     <div class="row text-center boxStyle">
         <h1>COMPOSITE CHARTS PROJECT</h1>
-        <h2>Women group: Names, Salaries, Ages, Cities and Profession</h2>
+        <h2>Women group: Name, Salary, Age, birth date, City and Profession</h2>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <div class="col-lg-12 text-center boxStyle" id="draw-chart">
             <h2>Salary per Person</h2>
             <script>bigGraph();</script>
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="col-lg-12  text-center boxStyle" id="per-person-chart"><h2>Salary per person</h2></div>
         <div class="col-lg-12  text-center boxStyle" id="per-store-chart"><h2>Age and salary per person</h2></div>
@@ -68,6 +68,14 @@
     <div class="row">
         <div class="col-md-12 text-center boxStyle" id="scatter-plot-graph"><h3>Salaries and Birth</h3></div>
         <script>scatterPlotGraph();</script>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center boxStyle" id="dc-row-selector">
+            <h3>Salaries by city selector</h3>
+            <div id="city-selector"></div>
+            <div id="person-salary-chart"></div>
+        </div>
+        <script>selectRow();</script>
     </div>
 </div>
 

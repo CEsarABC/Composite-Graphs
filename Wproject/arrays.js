@@ -347,3 +347,31 @@ function graph1() {
         .append('p')
         .text('D3 is awesome');
 }
+
+///////////////////////DC row and selector////////////////////
+
+function makeGraphs() {
+        var ndx = crossfilter(woman);
+
+        var cityDim = ndx.dimension(dc.pluck('town_p'));
+
+        var selectCity = dc.selectMenu('#store-selector');
+        cityDim = ndx.dimension(dc.pluck('town_p'));
+        selectCityGroup = cityDim.group();
+
+        selectStore
+            .dimension(storeDim)
+            .group(selectCityGroup);
+
+
+        var personDim = ndx.dimension(dc.pluck('name_p'));
+        var spendByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
+        dc.rowChart("#person-spend-chart")
+            .width(600)
+            .height(330)
+            .dimension(personDim)
+            .group(spendByPerson)
+            .xAxis().ticks(4);
+
+        dc.renderAll();
+    };

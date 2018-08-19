@@ -68,6 +68,7 @@ function makeBirthYear() {
 
 makeBirthYear();
 
+/////////////////creating a constructor for my objects //////////////////////
 
 function Person(first, prof, age, salary, city, birth, date1) {
     this.name_p = first;
@@ -81,7 +82,7 @@ function Person(first, prof, age, salary, city, birth, date1) {
 }
 //console.log(Object.values(woman)+'\n');
 
-///////////////////creating my array o objects to replace json files////////////////
+///////////////////creating my array of objects to replace json files////////////////
 var woman = [];
 function objectsInArray() {
     var j;
@@ -115,7 +116,7 @@ console.log(Object.values(woman[0]));
 
     salaryArray();
 
-
+//////////////test graph not shown in the main composite project////////////
 
 function bigGraph() {
     var scale = d3.scale.linear()//we need to apply this function to some of the values
@@ -179,6 +180,10 @@ function bigGraph() {
         .attr('fill','white')
 
 }
+
+
+///////////////////Creating all graphs based in my new data array which is created and randomised by the computer////////////////////////
+////////cross filter, pie charts, stacked graphs, scatter plot, row selector/////////////////
 
 function crossFilter() {
 
@@ -383,5 +388,32 @@ function scatterPlotGraph() {
         chart.margins().left += 20;
         chart.margins().bottom += 20;
         chart.margins().right = 150;
+        dc.renderAll();
+    }
+
+
+    function selectRow() {
+        var ndx = crossfilter(woman);
+
+        var cityDim = ndx.dimension(dc.pluck('town_p'));
+
+        var selectCity = dc.selectMenu('#city-selector');
+        cityDim = ndx.dimension(dc.pluck('town_p'));
+        selectCityGroup = cityDim.group();
+
+        selectCity
+            .dimension(cityDim)
+            .group(selectCityGroup);
+
+
+        var personDim = ndx.dimension(dc.pluck('name_p'));
+        var salaryByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
+        dc.rowChart("#person-salary-chart")
+            .width(900)
+            .height(700)
+            .dimension(personDim)
+            .group(salaryByPerson)
+            .xAxis().ticks(10);
+
         dc.renderAll();
     }
