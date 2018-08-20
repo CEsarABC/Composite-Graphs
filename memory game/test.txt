@@ -1,0 +1,30 @@
+
+// Memory game
+
+/* this game will be based in a colors memory game
+the point will be to create a random sequence of colors
+for the user to input the same sequence and advance
+just if the sequence is equal to the random sequence
+given by the computer*/
+
+
+
+
+* create on click events to add an element into an array that will be then compared to the array the computer first gave
+*if the array elements are equal to the computer array elements the loop continues
+* if the loop continues a function will sum numbers for every level
+*if loop continues another random array of events will be created by the computer adding one element to every loop
+
+*if the array is not equal display 'you lose'
+*if array is equal display 'you pass to the next round'
+
+*creates an array of two elements
+*shows the elements in screen
+*asks for input
+*creates an array with input
+*if new array.length is equal to computer array.length
+*compares new array to computer array
+*if new array is equal to computer array
+*insert a new random element in computer array
+*shows elements in screen
+*asks for input

@@ -1,0 +1,45 @@
+body{
+  background-color: #1d1e1e;
+  color: white;
+  font-family: sans-serif;
+}
+button{
+  border: none;
+  margin: 10px;
+  padding: none;
+}
+.container{
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  text-align: center;
+  border: solid 1px white;
+  padding: 10px;
+}
+.box{
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  /*margin: 10px;*/
+}
+.blueDiv{
+  background-color: blue;
+}
+.yellowDiv{
+  background-color: yellow;
+}
+.redDiv{
+  background-color: red;
+}
+.greenDiv{
+  background-color: green;
+}
+.purpleDiv{
+  background-color: purple;
+}
+ul{
+  text-align: left;
+}
+#boxes{
+/*border: solid 1px white;*/
+}
