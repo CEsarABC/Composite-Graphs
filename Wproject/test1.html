@@ -1,158 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
+    <title>Composite Test 1</title>
+    <link rel="stylesheet" href="css/dc.min.css" type="text/css"/>
+    <script type="text/javascript" src="jsModules/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/compositeStyles.css" type="text/css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css" type="text/css" />
-    <script type="text/javascript" src="d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
+    <script type="text/javascript" src="jsModules/d3.min.js"></script>
+    <script type="text/javascript" src="jsModules/crossfilter.min.js"></script>
+    <script type="text/javascript" src="jsModules/dc.min.js"></script>
     <script type="text/javascript" src="jsModules/queue.min.js"></script>
-    <script src="arrays.js"></script>
-    <title>Crossfilter</title>
-    <style>
-        .container{
-            width: auto;
-            height: auto;
-            border: solid 1px red;
-            margin: 10px;
-            float: left;
-        }
-    </style>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script src="cleanGraphsTest.js"></script>
+
+
 </head>
 <body>
-<h1>Data Visualisation</h1>
 
-    <h2>scatter-plot</h2>
-
-    <div>
-        <div id="scatter-plot"></div>
+<nav class="navbar navbar-inverse container" id="navBar1">
+    <div class="container">
+        <div class="nav navbar-header">
+            <a class="navbar-brand" href="#">Disney Staff Data</a>
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#myList">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <ul id="myList" class="nav nav-tabs navbar-right">
+            <li><a data-toggle="tab" href="#mainGraphs" id="graph1btn">Line Graphs</a></li>
+            <li><a data-toggle="tab" href="#pies" id="graph4btn">Pie Graphs</a></li>
+            <li><a data-toggle="tab" href="#chart-here2" id="graph5btn">Staked graph</a></li>
+            <li><a data-toggle="tab" href="#scatter-plot-graph" id="graph6btn">Scatter Graph</a></li>
+            <li><a data-toggle="tab" href="#lastChart" id="graph7btn">Rows Graph</a></li>
+        </ul>
     </div>
+</nav>
 
-    <script>
-
-    function makeGraphs() {
-
-        var ndx = crossfilter(woman);
-
-        var parseDate = d3.time.format("%d/%m/%Y").parse;
-        woman.forEach(function(d){
-            d.date_p = parseDate(d.date_p);
-        });
-
-        var date_dim = ndx.dimension(dc.pluck('date_p'));
-
-        var min_date = date_dim.bottom(1)[0].date_p;
-        var max_date = date_dim.top(1)[0].date_p;
-
-        var salary_dim = ndx.dimension(function (d) {
-            return [d.date_p, d.salary_p, d.name_p];
-        });
-
-        var tradeColors = d3.scale.ordinal()
-            .domain(['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kim',
-    'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'])
-            .range(["red", "green", "blue",'orange','black','yellow','brown','purple',
-                '#2D2C34','#68941B','#CB4F2D','#9C4A1A','#1F779F','#4C4D4F','#0D3649','#64400B','#863B21','#5B5348']);
-
-
-        var salary_group = salary_dim.group();
-
-        var subChart = function (c) {
-            return dc.scatterPlot(c)
-                .symbolSize(8)
-                .highlightedSize(10);
-        };
-
-
-        var chart = dc.seriesChart("#scatter-plot");
-        chart
-            .width(900)
-            .height(450)
-            .chart(subChart)
-            .x(d3.time.scale().domain([min_date, max_date]))
-            .brushOn(false)
-            .clipPadding(10)
-            .yAxisLabel("Salary")
-            .xAxisLabel("Birth")
-            .elasticY(true)
-            .dimension(salary_dim)
-            .group(salary_group)
-            .mouseZoomable(true)
-            .shareTitle(false) // allow default scatter title to work
-            .seriesAccessor(function (d) {
-                return d.key[2];
-            })
-            .keyAccessor(function (d) {
-                return d.key[0];
-            })
-            .valueAccessor(function (d) {
-                return +d.key[1];
-            })
-            .colorAccessor(function (d) {
-                return d.key[2].name_p;
-            })
-            .colors(tradeColors)
-
-            .legend(dc.legend().x(770).y(50).itemHeight(13).gap(5).horizontal(1).legendWidth(70).itemWidth(70));
-
-        chart.margins().left += 20;
-        chart.margins().bottom += 20;
-        chart.margins().right = 150;
-        dc.renderAll();
-    }
-    makeGraphs();
-
-    </script>
+<div class="jumbotron container" id="jumbo">
+    <div class="container">
+        <h1>Disney Store Staff Data base</h1>
+        <p>This tool is for management only, please revise changes monthly</p>
+        <p><a class="btn btn-info btn-sm" href="#">Information for Schedule</a></p>
+    </div>
 </div>
-<h1>Data Vizualisation</h1>
+<div class="container">
 
-    <h2>DC Average</h2>
-
-    <div>
-    <h3>Select Store</h3>
-    <div id="store-selector"></div>
+    <div class="row tab-content">
+        <div class="tab-pane fade" id="mainGraphs">
+            <div class="col-md-12  text-center boxStyle" id="per-person-chart"><h2>Salary per person</h2></div>
+            <div class="col-md-12  text-center boxStyle" id="per-store-chart"><h2>Age and salary</h2></div>
+            <div class="col-md-12  text-center boxStyle" id="per-state-chart"><h2>City Total Salaries</h2></div>
+                <script>crossFilter();</script>
+        </div>
+        <div class="col-md-12 text-center boxStyle tab-pane fade" id="chart-here2"><h3>Total Salary Per Person Broken Down By City</h3>
+            <script>stackedGraphs();</script>
+        </div>
+        <div class="col-md-12 text-center boxStyle tab-pane fade" id="scatter-plot-graph"><h3>Salaries and Birth</h3>
+        <script>scatterPlotGraph();</script>
+        </div>
+        <div class="col-md-12 boxStyle text-center tab-pane fade" id="pies">
+            <div class="col-md-4 text-center pieStyle" id="draw-pies1"><h3> Salary per person</h3></div>
+            <div class="col-md-4 text-center pieStyle" id="draw-pies2"><h3> City total salaries</h3></div>
+            <div class="col-md-4 text-center pieStyle" id="draw-pies3"><h3> Person age</h3>
+                <script>pieChartsWoman();</script></div>
+        </div>
+        <div class="tab-pane fade" id="lastChart">
+            <div class="col-lg-11 text-center boxStyle" id="dc-row-selector"><h3>Total Salaries by Sector</h3></div>
+            <div class="col-lg-11 text-center boxStyle" id="city-selector"></div>
+            <div class="col-lg-11 text-center boxStyle" id="person-salary-chart">
+                <script>selectRow();</script>
+            </div>
+        </div>
     </div>
-
-    <div>
-    <h3>Person Spend</h3>
-    <div id="person-spend-chart"></div>
-
-    </div>
-<div>
-    <script>
-    function makeGraphs() {
-        var ndx = crossfilter(woman);
-
-        var cityDim = ndx.dimension(dc.pluck('town_p'));
-
-        var selectCity = dc.selectMenu('#store-selector');
-        cityDim = ndx.dimension(dc.pluck('town_p'));
-        selectCityGroup = cityDim.group();
-
-        selectCity
-            .dimension(cityDim)
-            .group(selectCityGroup);
-
-
-        var personDim = ndx.dimension(dc.pluck('name_p'));
-        var salaryByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
-        dc.rowChart("#person-spend-chart")
-            .width(900)
-            .height(700)
-            .dimension(personDim)
-            .group(salaryByPerson)
-            .xAxis().ticks(10);
-
-        dc.renderAll();
-    };
-    makeGraphs();
-    </script>
-
-</div>
-
-
+</div><!--end container-->
 
 </body>
+<!--<script src="events.js"></script>-->
 </html>

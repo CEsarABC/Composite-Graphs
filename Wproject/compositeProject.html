@@ -38,11 +38,45 @@
 
 </head>
 <body>
-<div class="container">
-    <div class="row text-center boxStyle">
-        <h1>COMPOSITE CHARTS PROJECT</h1>
-        <h2>Women group: Name, Salary, Age, birth date, City and Profession</h2>
+
+<nav class="navbar navbar-inverse container">
+    <div class="container">
+        <div class="nav navbar-header">
+            <a class="navbar-brand" href="#">Disney Staff Data</a>
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#myList">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <ul id="myList" class="nav navbar-nav navbar-right collapse navbar-collapse">
+            <li><a href="#" id="graph1btn">Graph 1</a></li>
+            <li><a href="#" id="graph2btn">Graph 2</a></li>
+            <li><a href="#">Graph 3</a></li>
+            <li><a href="#">Graph 4</a></li>
+            <li><a href="#">Graph 6</a></li>
+            <li><a href="#">Graph 7</a></li>
+        </ul>
     </div>
+</nav>
+
+<div class="jumbotron container">
+    <div class="container">
+        <h1>Disney Store Staff Data base</h1>
+        <p>This tool is for management only, please revise changes monthly</p>
+        <p><a class="btn btn-info btn-sm" href="#">Information for Schedule</a></p>
+    </div>
+</div>
+<div class="container">
+    <!--<div class="row">
+        <div class="col-md-12 text-center boxStyle">
+            <h1>COMPOSITE CHARTS PROJECT</h1>
+            <h2>Women group: <a class="btn" id="name-button">Name</a>, Salary, Age, birth date, City and Profession</h2>
+        </div>
+    </div>-->
     <!--<div class="row">
         <div class="col-lg-12 text-center boxStyle" id="draw-chart">
             <h2>Salary per Person</h2>
@@ -50,15 +84,15 @@
         </div>
     </div>-->
     <div class="row">
-        <div class="col-lg-12  text-center boxStyle" id="per-person-chart"><h2>Salary per person</h2></div>
-        <div class="col-lg-12  text-center boxStyle" id="per-store-chart"><h2>Age and salary per person</h2></div>
-        <div class="col-lg-12  text-center boxStyle" id="per-state-chart"><h2>Cities</h2></div>
+        <div class="col-md-12  text-center boxStyle" id="per-person-chart"><h2>Salary per person</h2></div>
+        <div class="col-md-12  text-center boxStyle" id="per-store-chart"><h2>Age and salary</h2></div>
+        <div class="col-md-12  text-center boxStyle" id="per-state-chart"><h2>City Total Salaries</h2></div>
             <script>crossFilter();</script>
     </div>
     <div class="row">
-        <div class="col-md-4 text-center boxStyle" id="draw-pies1"><h3> Salary per person</h3></div>
-        <div class="col-md-4 text-center boxStyle" id="draw-pies2"><h3> City total salaries</h3></div>
-        <div class="col-md-4 text-center boxStyle" id="draw-pies3"><h3> Person age</h3></div>
+        <div class="col-md-4 text-center pieStyle" id="draw-pies1"><h3> Salary per person</h3></div>
+        <div class="col-md-4 text-center pieStyle" id="draw-pies2"><h3> City total salaries</h3></div>
+        <div class="col-md-4 text-center pieStyle" id="draw-pies3"><h3> Person age</h3></div>
         <script>pieChartsWoman();</script>
     </div>
     <div class="row">
@@ -70,14 +104,14 @@
         <script>scatterPlotGraph();</script>
     </div>
     <div class="row">
-        <div class="col-md-12 text-center boxStyle" id="dc-row-selector">
-            <h3>Salaries by city selector</h3>
-            <div id="city-selector"></div>
-            <div id="person-salary-chart"></div>
-        </div>
+        <div class="col-md-12 text-center boxStyle" id="dc-row-selector"><h3>Salaries by Sector</h3></div>
+        <div class="col-md-12 text-center boxStyle" id="city-selector"></div>
+        <div class="col-md-12 text-center boxStyle" id="person-salary-chart"></div>
         <script>selectRow();</script>
+
     </div>
-</div>
+</div><!--end container-->
 
 </body>
+<script src="events.js"></script>
 </html>

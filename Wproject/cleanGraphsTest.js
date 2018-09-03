@@ -409,8 +409,8 @@ function scatterPlotGraph() {
         var personDim = ndx.dimension(dc.pluck('prof_p'));
         var salaryByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
         dc.rowChart("#person-salary-chart")
-            .width(700)
-            .height(600)
+            .width(600)
+            .height(500)
             .dimension(personDim)
             .group(salaryByPerson)
             .xAxis().ticks(4);
