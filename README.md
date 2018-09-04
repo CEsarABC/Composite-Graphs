@@ -5,9 +5,11 @@ Composite Graphs Project, from local repository
 my first idea was to create a function to create a json file containing the info I wanted, without having to type every value
 for every objectand be able to add new values if I wanted. 
 the creation of the json file was not a succes, but I created an array of objects which is very similar to
-the calls of json files in which the json file is an array filled with objects, so I decided to use this array as my data and it worked
-as having the jason file parsed and ready to work.
+the calls of json files in which the json file is an array filled with objects, so I decided to use this array as my data and it worked as having the jason file parsed and ready to work.
+
 I decided to use my array to be the base of my graphs
+
+*working with bootstrap, DC, D3, Crossfilter.
 
 *I have a messy repository because is my first time trying to use github properly... sorry!!!
 
