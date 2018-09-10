@@ -17,7 +17,9 @@ the calls of json files in which the json file is an array filled with objects, 
 
 *I have a messy repository because is my first time trying to use github properly... sorry!!!
 
-*this repository was created to host my the local repository in my computer
+*this repository was created to host my the local repository in my computer, the problem is all my commits and info are in the same folder with my study files and its was late to be able to separate then and publish in git pages.
+
+*https://cesarabc.github.io/gitProjectPage/index.html project visualization from a new repository made with just the files uploaded in order to use git pages.
 
 all folders and files used as reference for the creation of the project are part of this repository
 
