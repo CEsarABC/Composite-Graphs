@@ -73,10 +73,9 @@ github
 
 * https://cesarabc.github.io/gitProjectPage/index.html project visualization from a new repository.
 
-///////////////////
 
 ** Acknowledgements
 
-    I received inspiration for this project from X
+    thanks to the code institute for giving me the opportunity to learn.
 
 
