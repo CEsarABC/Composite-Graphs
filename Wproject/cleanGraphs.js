@@ -187,7 +187,6 @@ function bigGraph() {
 
 function crossFilter() {
 
-
     var ndx = crossfilter(woman);
 
     var name_dim = ndx.dimension(dc.pluck('name_p'));
@@ -339,8 +338,8 @@ function scatterPlotGraph() {
         });
 
         var tradeColors = d3.scale.ordinal()
-            .domain(['Alejandra','Martina','Josefa','Renata','Francis','Mariana','Flora','Tatiana','Marisol','Kim',
-    'Alexa','Isabel','Cecilia','Aquila','Augusta','Aurelia','Flavia','Horatia'])
+            .domain(['Roland','Martina','Josefa','Renata','Oscar','Mariana','Flora','Tatiana','Odessas','Kim',
+                'Jhon','Isabel','Cecilia','Caesar','Augusta','Aurelia','Flavia','Horatio'])
             .range(["red", "green", "blue",'orange','black','yellow','brown','purple',
                 '#2D2C34','#68941B','#CB4F2D','#9C4A1A','#1F779F','#4C4D4F','#0D3649','#64400B','#863B21','#5B5348']);
 
@@ -409,8 +408,8 @@ function scatterPlotGraph() {
         var personDim = ndx.dimension(dc.pluck('prof_p'));
         var salaryByPerson = personDim.group().reduceSum(dc.pluck('salary_p'));
         dc.rowChart("#person-salary-chart")
-            .width(700)
-            .height(600)
+            .width(600)
+            .height(500)
             .dimension(personDim)
             .group(salaryByPerson)
             .xAxis().ticks(4);

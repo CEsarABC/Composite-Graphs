@@ -1,139 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
-    <title>Index for arrays js</title>
-    <script type="text/javascript" src="d3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
-    <script src="arrays.js"></script>
-    <!--<script src="test.js"></script>-->
-    <style>
-        .box{
-            width: auto;
-            height: auto;
-            padding: 10px;
-            display: inline-block;
-            border: solid 1px black;
-        }
-        .box1{
-            width: auto;
-            height: auto;
-            padding: 10px;
-            border: solid 1px black;
-        }
-        .stop-left {
-                stop-color: #3f51b5;  /* Indigo */
-            }
+    <title>Composite Test 1</title>
+    <link rel="stylesheet" href="css/dc.min.css" type="text/css"/>
+    <script type="text/javascript" src="jsModules/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/compositeStyles.css" type="text/css">
 
-            .stop-right {
-                stop-color: #009688;  /* Teal */
-            }
+    <script type="text/javascript" src="jsModules/d3.min.js"></script>
+    <script type="text/javascript" src="jsModules/crossfilter.min.js"></script>
+    <script type="text/javascript" src="jsModules/dc.min.js"></script>
+    <script type="text/javascript" src="jsModules/queue.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-            .filled {
-                fill: url(#mainGradient);
-            }
 
-            .outlined {
-                fill:   none;
-                stroke: url(#mainGradient);
-                stroke-width: 4;
-            }
-    </style>
+    <script src="cleanGraphs.js"></script>
+
+
 </head>
 <body>
-<div class="box1" id="draw-chart">
-    <h1>Salaries graph from (Woman) array of objects</h1>
-    <script>bigGraph();</script>
-</div>
-<div class="box1">
-    <div>
-        <h1>Data from an array of objects</h1>
-        <button onclick="writeToDocumentNames()">Names</button>
-        <button onclick="writeToDocumentCareers()">Careers</button>
-        <button onclick="writeToDocumentAges()">Ages</button>
-        <button onclick="writeToDocumentSalaries()">Salaries</button>
-        <button onclick="writeToDocumentTown()">Cities</button>
-    </div>
-
-    <div class="box" id="demo"></div>
-    <div class="box" id="demo1"></div>
-    <div class="box" id="demo2"></div>
-    <div class="box" id="demo3"></div>
-    <div class="box" id="demo4"></div>
-</div>
-
-<div id="draw-here">
-    <h1>Example of circles and array</h1>
+<div class="container">
     <script>
-    var w = 800;
-    var h = 200;
-    var data = [40, 50, 10, 30, 20, 45, 80];
-
-    var svg = d3.select("#draw-here")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
-    svg.selectAll("circle")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("cx", function (d,i) {
-                return 50 + (i * 100);
-        })
-        /*.attr("cy", h/2)*/
-        .attr('cy', function (d) {
-            return h - (d / 2) ;
-        })
-        .attr("r", function (d) {
-                return d/2;
-    });
+        function alertScreen() {
+            alert('Please be aware This page contains D3 charts and the minimum screen size is 992px')
+        }
+        alertScreen();
     </script>
-</div>
 
-<div id="d3Test">
-    <h1>D3 and array of objects</h1>
-    <script>salaryGraph();</script>
-</div>
+        <header class="container">
+            <nav class="navbar navbar-inverse" id="navBar1">
+            <div class="nav navbar-header">
+                <a class="navbar-brand" href="#">Disney Staff Data Base</a>
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target="#myList">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            </nav>
+        </header>
 
-<div id="graph1">
-    <h1>Sample of a simple D3</h1>
-    <script>graph1();</script>
-</div>
-<!--------
-<div>
-   <script>
 
-        queue()
-        .defer(d3.json, woman)
-        .await(makeGraphs);
-
-    function makeGraphs(error, womanData) {
-        var ndx = crossfilter(womanData);
-
-        var name_dim = ndx.dimension(dc.pluck('name_p'));
-        var total_spend_per_person = name_dim.group().reduceSum(dc.pluck('salary_p'));
-
-        dc.barChart("#per-person-chart")
-            .width(300)
-            .height(150)
-            .margins({top: 10, right: 50, bottom: 30, left: 50})
-            .dimension(name_dim)
-            .group(total_spend_per_person)
-            .transitionDuration(500)
-            .x(d3.scale.ordinal())
-            .xUnits(dc.units.ordinal)
-            .xAxisLabel("Person")
-            .yAxis().ticks(4);
-
-        dc.renderAll();
-
-   </script>
-   -------->
-</div>
+    <section class="jumbotron container" id="jumbo">
+        <div class="container">
+            <h1>Bond Street Store</h1>
+            <p>This tool is for management only, please revise changes monthly</p>
+            <p><a class="btn btn-info btn-sm" href="#">Information for Schedule</a></p>
+        </div>
+    </section>
+    <div>
+        <article class="boxStyle">
+            <ul id="myList" class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#" id="graph0btn">Information</a></li>
+                <li><a data-toggle="tab" href="#mainGraphs" id="graph1btn">Salaries and Age</a></li>
+                <li><a data-toggle="tab" href="#pies" id="graph4btn">Salaries and Age pies</a></li>
+                <li><a data-toggle="tab" href="#chart-here2" id="graph5btn">Member Salary and city</a></li>
+                <li><a data-toggle="tab" href="#scatter-plot-graph" id="graph6btn">Member Salary and Age</a></li>
+                <li><a data-toggle="tab" href="#lastChart" id="graph7btn">Salaries by sector</a></li>
+            </ul>
+        </article>
+    </div>
+    <div class="container">
+        <div class="row tab-content">
+            <div class="tab-pane fade" id="mainGraphs">
+                <div class="col-md-12  text-center boxStyle" id="per-person-chart"><h2>Salary per person</h2></div>
+                <div class="col-md-12  text-center boxStyle" id="per-store-chart"><h2>Age and salary</h2></div>
+                <div class="col-md-12  text-center boxStyle" id="per-state-chart"><h2>City Total Salaries</h2></div>
+                    <script>crossFilter();</script>
+            </div>
+            <div class="col-md-12 text-center boxStyle tab-pane fade" id="chart-here2"><h3>Total Salary Per Person Broken Down By City</h3>
+                <script>stackedGraphs();</script>
+            </div>
+            <div class="col-md-12 text-center boxStyle tab-pane fade" id="scatter-plot-graph"><h3>Salaries and Birth</h3>
+            <script>scatterPlotGraph();</script>
+            </div>
+            <div class="tab-pane fade" id="pies">
+                <div class="col-md-4 text-center pieStyle" id="draw-pies1"><h3> Salary per person</h3></div>
+                <div class="col-md-4 text-center pieStyle" id="draw-pies2"><h3> City total salaries</h3></div>
+                <div class="col-md-4 text-center pieStyle" id="draw-pies3"><h3> Person age</h3>
+                    <script>pieChartsWoman();</script></div>
+            </div>
+            <div class="tab-pane fade boxStyle" id="lastChart">
+                <div class="text-center boxStyle"id="person-salary-chart">
+                    <h3>Total Salaries by Sector and city</h3>
+                    <div class="boxStyle"id="city-selector"></div>
+                    <script>selectRow();</script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end container-->
+<footer class="col-md-12 text-center">
+    <p>© Disney © Disney•Pixar © & ™ Lucasfilm LTD © Marvel. All Rights Reserved</p>
+</footer>
 </body>
+<!--<script src="events.js"></script>-->
 </html>
